@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for(@aluno, html: { class: "form-horizontal" }) do |f| %>
+      <div class="form-group">
+        <%= f.label :nome, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.text_field :nome, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :cpf, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.text_field :cpf, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :rg, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.text_field :rg, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :data_nascimento, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.date_select :data_nascimento, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :telefone, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.text_field :telefone, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          <%= f.submit t('buttons.save'), class: "btn btn-default" %>
+          <%= link_to t('buttons.back'), alunos_path, class: "btn btn-default"%>
+        </div>
+      </div>
+
+      <% if @aluno.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger col-xs-offset-1 col-xs-10" role="alert">
+          <ul>
+          <% @aluno.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+
+    <script type="text/javascript">
+      $(".form-group:has(.field_with_errors)").addClass("has-error");
+    </script>
+  </div>
+</div>

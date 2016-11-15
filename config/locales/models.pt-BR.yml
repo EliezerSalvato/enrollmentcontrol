@@ -1,0 +1,13 @@
+"pt-BR":
+  activerecord:
+    models:
+      aluno:
+        one: Aluno
+        other: Alunos
+    attributes:
+      aluno:
+        cpf: CPF
+        rg: RG
+        data_nascimento: Data de Nascimento
+        nome: Nome
+        telefone: Telefone
