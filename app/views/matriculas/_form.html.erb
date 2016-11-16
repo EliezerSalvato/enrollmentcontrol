@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for(@matricula, html: { class: "form-horizontal" }) do |f| %>
+      <div class="form-group">
+        <%= f.label :aluno_id, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.collection_select(:aluno_id, @alunos_options_for_select, :id, :nome, {}, { class: 'form-control' }) %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :curso_id, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.collection_select(:curso_id, @cursos_options_for_select, :id, :nome, {}, { class: 'form-control' }) %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :data_matricula, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.date_select :data_matricula, start_year: Date.current.year, end_year: 1900 %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :ano, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.number_field :ano, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :pago, class: "col-xs-2 control-label" %>
+        <div class="col-xs-8">
+          <%= f.select :pago, options_for_select(@sim_nao_options_for_select), {}, { class: 'form-control' } %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          <%= f.submit t('buttons.save'), class: "btn btn-default" %>
+          <%= link_to t('buttons.back'), matriculas_path, class: "btn btn-default"%>
+        </div>
+      </div>
+
+      <%= f.hidden_field :ativo, value: 1 %>
+
+      <% if @matricula.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger col-xs-offset-1 col-xs-10" role="alert">
+          <ul>
+          <% @matricula.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+
+    <script type="text/javascript">
+      $(".form-group:has(.field_with_errors)").addClass("has-error");
+    </script>
+  </div>
+</div>

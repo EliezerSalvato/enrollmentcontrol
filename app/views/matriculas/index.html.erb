@@ -1,0 +1,43 @@
+<% if notice != nil %>
+  <div class="alert alert-success" role="alert">
+    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+    <%= notice %>
+  </div>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "#{t('messages.listing')} #{@matriculas.model.model_name.human(count: @matriculas.count)}" %>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= @matriculas.model.human_attribute_name("aluno") %></th>
+        <th><%= @matriculas.model.human_attribute_name("curso") %></th>
+        <th><%= @matriculas.model.human_attribute_name("data_matricula") %></th>
+        <th><%= @matriculas.model.human_attribute_name("ano") %></th>
+        <th><%= @matriculas.model.human_attribute_name("ativo") %></th>
+        <th><%= @matriculas.model.human_attribute_name("pago") %></th>
+        <th><%= t("buttons.actions") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @matriculas.each do |matricula| %>
+        <tr>
+          <td><%= matricula.aluno.nome %></td>
+          <td><%= matricula.curso.nome %></td>
+          <td><%= matricula.data_matricula.strftime("%d/%m/%Y") %></td>
+          <td><%= matricula.ano %></td>
+          <td><%= busca_sim_nao(matricula.ativo) %></td>
+          <td><%= busca_sim_nao(matricula.pago) %></td>
+          <td><%= link_to "", edit_matricula_path(matricula), class: "glyphicon glyphicon-pencil", title: t('buttons.edit') %>&nbsp;
+          <%= link_to "", matricula, method: :delete, data: { confirm: t('messages.confirm') }, class: "glyphicon glyphicon-remove", title: t('buttons.destroy') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to t('buttons.new'), new_matricula_path, class: "btn btn-default" %>

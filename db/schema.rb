@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115000332) do
+ActiveRecord::Schema.define(version: 20161115223420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,4 +26,28 @@ ActiveRecord::Schema.define(version: 20161115000332) do
     t.datetime "updated_at",                  null: false
   end
 
+  create_table "cursos", force: :cascade do |t|
+    t.string   "nome",            limit: 255
+    t.decimal  "valor_inscricao",             precision: 11, scale: 2
+    t.integer  "periodo"
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+  end
+
+  create_table "matriculas", force: :cascade do |t|
+    t.integer  "aluno_id"
+    t.integer  "curso_id"
+    t.date     "data_matricula"
+    t.integer  "ano"
+    t.integer  "ativo"
+    t.integer  "pago"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "matriculas", ["aluno_id"], name: "index_matriculas_on_aluno_id", using: :btree
+  add_index "matriculas", ["curso_id"], name: "index_matriculas_on_curso_id", using: :btree
+
+  add_foreign_key "matriculas", "alunos"
+  add_foreign_key "matriculas", "cursos"
 end

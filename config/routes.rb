@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :matriculas
+  resources :cursos
   resources :alunos
   get 'home/index'
   root 'home#index'

@@ -4,6 +4,12 @@
       aluno:
         one: Aluno
         other: Alunos
+      curso:
+        one: Curso
+        other: Cursos
+      matricula:
+        one: Matrícula
+        other: Matrículas
     attributes:
       aluno:
         cpf: CPF
@@ -11,3 +17,14 @@
         data_nascimento: Data de Nascimento
         nome: Nome
         telefone: Telefone
+      curso:
+        nome: Nome
+        valor_inscricao: Valor da Inscrição
+        periodo: Período
+      matricula:
+        aluno: Aluno
+        curso: Curso
+        data_matricula: Data da Matrícula
+        ano: Ano
+        ativo: Ativo
+        pago: Pago

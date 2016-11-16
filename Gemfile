@@ -32,6 +32,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap', '3.3.7'
 end
 
+# CpfUtils é uma suite de funcionalidades para CPF.
+gem 'cpf_utils'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,0 +1,37 @@
+<% if notice != nil %>
+  <div class="alert alert-success" role="alert">
+    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+    <%= notice %>
+  </div>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "#{t('messages.listing')} #{@cursos.model.model_name.human(count: @cursos.count)}" %>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= @cursos.model.human_attribute_name("nome") %></th>
+        <th><%= @cursos.model.human_attribute_name("valor_inscricao") %></th>
+        <th><%= @cursos.model.human_attribute_name("periodo") %></th>
+        <th><%= t("buttons.actions") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @cursos.each do |curso| %>
+        <tr>
+          <td><%= curso.nome %></td>
+          <td><%= format("%.2f", curso.valor_inscricao) %></td>
+          <td><%= busca_descricao_periodo(curso.periodo) %></td>
+          <td><%= link_to "", edit_curso_path(curso), class: "glyphicon glyphicon-pencil", title: t('buttons.edit') %>&nbsp;
+          <%= link_to "", curso, method: :delete, data: { confirm: t('messages.confirm') }, class: "glyphicon glyphicon-remove", title: t('buttons.destroy') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to t('buttons.new'), new_curso_path, class: "btn btn-default" %>

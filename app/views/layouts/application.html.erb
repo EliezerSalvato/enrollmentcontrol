@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EnrollmentControl</title>
+  <title><%= t('title') %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% url = request.original_fullpath %>
+
   <div class="container">
     <div class="navbar navbar-default">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
-          <li><a href="/alunos">Alunos</a></li>
-          <li><a href="/cursos">Cursos</a></li>
-          <li class="dropdown">
+          <li class="<%= url == '/' ? 'active' : '' %>"><%= link_to 'Home', root_path %></li>
+          <li class="<%= url.include?('alunos') ? 'active' : '' %>"><%= link_to 'Alunos', alunos_path %></li>
+          <li class="<%= url.include?('cursos') ? 'active' : '' %>"><%= link_to 'Cursos', cursos_path %></li>
+          <li class="dropdown <%= url.include?('matriculas') ? 'active' : '' %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matrículas <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="/matriculas">Listagem</a></li>
-              <li><a href="/pagamentos">Pagamento</a></li>
-              <li><a href="/cancelamentos">Cancelamento</a></li>
+              <li><%= link_to 'Listagem', matriculas_path %></li>
+              <li><%= link_to 'Pagamento', matriculas_path %></li>
+              <li><%= link_to 'Cancelamento', matriculas_path %></li>
             </ul>
           </li>
         </ul>

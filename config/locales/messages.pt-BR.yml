@@ -4,7 +4,10 @@
     listing: Listando
     including: Incluindo
     editing: Editando
-    errors: ocorreram...
-    created: Item criado com sucesso!
-    updated: Item atualizado com sucesso!
-    destroyed: Item excluído com sucesso!
+    created: Registro incluído com sucesso!
+    updated: Registro atualizado com sucesso!
+    destroyed: Registro excluído com sucesso!
+    numbers_only: deve conter apenas números!
+    max_9: deve conter no máximo 9 caracteres!
+    max_255: deve conter no máximo 255 caracteres!
+    only_11: deve conter 11 caracteres!
