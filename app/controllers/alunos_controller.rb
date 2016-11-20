@@ -1,10 +1,10 @@
 class AlunosController < ApplicationController
-  before_action :set_aluno, only: [:show, :edit, :update, :destroy]
+  before_action :set_aluno, only: [:edit, :update, :destroy]
 
   # GET /alunos
   # GET /alunos.json
   def index
-    @alunos = Aluno.all
+    @alunos = Aluno.all.page(params[:page]).per(15)
   end
 
   # GET /alunos/new
@@ -49,10 +49,16 @@ class AlunosController < ApplicationController
   # DELETE /alunos/1
   # DELETE /alunos/1.json
   def destroy
-    @aluno.destroy
-    respond_to do |format|
-      format.html { redirect_to alunos_path, notice: I18n.t('messages.destroyed') }
-      format.json { head :no_content }
+    if @aluno.destroy
+      respond_to do |format|
+        format.html { redirect_to alunos_path, notice: I18n.t('messages.destroyed') }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to alunos_path, alert: I18n.t('messages.error_destroyed') }
+        format.json { head :no_content }
+      end
     end
   end
 

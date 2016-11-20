@@ -30,10 +30,16 @@ gem 'rails-i18n'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap', '3.3.7'
+  gem 'rails-assets-bootbox'
 end
 
 # CpfUtils é uma suite de funcionalidades para CPF.
 gem 'cpf_utils'
+
+# A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
+gem 'kaminari'
+gem 'kaminari-i18n'
+gem 'bootstrap-kaminari-views'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

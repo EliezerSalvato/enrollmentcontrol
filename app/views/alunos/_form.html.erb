@@ -50,7 +50,15 @@
     <% end %>
 
     <script type="text/javascript">
+      $("#aluno_data_nascimento_1i").change(function() {
+        var ano = this.value;
+        if ((ano % 4) == 0 && ((ano % 100) != 0 || ((ano % 100) == 0 && (ano % 400) == 0))) {
+          showModalInfo('Ano bissexto');
+        }
+      });
+
       $(".form-group:has(.field_with_errors)").addClass("has-error");
+      $("select").addClass("form-control").css("width", "33.33%").css("float", "left");
     </script>
   </div>
 </div>

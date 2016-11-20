@@ -1,0 +1,23 @@
+en:
+  messages:
+    confirm: Are you sure you want to remove this item?
+    listing: List of
+    including: Including
+    editing: Editing
+    paying: Payment of
+    filters: Filters
+    created: Item included successfully!
+    updated: Item updated successfully!
+    destroyed: Item successfully deleted!
+    canceled: Registration canceled successfully!
+    paid: Enrollment paid successfully!
+    error_destroyed: You can not remove it because it is in use!
+    numbers_only: Must contain only numbers!
+    max_9: Must contain a maximum of 9 characters!
+    max_255: Must contain a maximum of 255 characters!
+    only_11: Must contain 11 characters!
+    cancel_matricula: Are you sure you want to cancel your enrollment?
+    value_paid_less_than: Value paid is less than the registration value
+    must_be_informed: must be informed
+    change_of: Change of $
+    enrolled: already enrolled in this year and period!

@@ -7,7 +7,47 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= "#{t('messages.listing')} #{@matriculas.model.model_name.human(count: @matriculas.count)}" %>
+    <%= "#{t('messages.filters')}" %>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= form_tag(matriculas_path, :method => "get", class: "form-horizontal") do %>
+        <div class="form-group">
+          <div class="col-xs-3">
+            <%= label_tag :aluno, t('activerecord.models.aluno.one'), class: "col-xs-3" %>
+            <div class="col-xs-9">
+              <%= text_field_tag :aluno, params[:aluno], class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <%= label_tag :curso, t('activerecord.models.curso.one'), class: "col-xs-3" %>
+            <div class="col-xs-9">
+              <%= text_field_tag :curso, params[:curso], class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <%= label_tag :ano, t('activerecord.attributes.matricula.ano'), class: "col-xs-1" %>
+            <div class="col-xs-8">
+              <%= text_field_tag :ano, params[:ano], class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="col-xs-1">
+              <input type="checkbox" name="pagamento_pendente" <%= params[:pagamento_pendente] != nil ? "checked='checked'" : "" %>>
+            </div>
+            <%= label_tag :pagamento_pendente, t('buttons.pending_payment'), class: "col-xs-10" %>
+          </div>
+          <%= submit_tag t('buttons.filter'), class: "btn btn-default" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "#{t('messages.listing')} #{@matriculas.model.model_name.human(count: 2)}" %>
   </div>
 
   <table class="table table-hover">
@@ -19,6 +59,8 @@
         <th><%= @matriculas.model.human_attribute_name("ano") %></th>
         <th><%= @matriculas.model.human_attribute_name("ativo") %></th>
         <th><%= @matriculas.model.human_attribute_name("pago") %></th>
+        <th class="text-center"><%= t("buttons.payment") %></th>
+        <th class="text-center"><%= t("buttons.cancellation") %></th>
         <th><%= t("buttons.actions") %></th>
       </tr>
     </thead>
@@ -32,12 +74,30 @@
           <td><%= matricula.ano %></td>
           <td><%= busca_sim_nao(matricula.ativo) %></td>
           <td><%= busca_sim_nao(matricula.pago) %></td>
+          <td class="text-center">
+            <% if matricula.pago == 1 %>
+              -
+            <% else %>
+              <%= link_to "", matriculas_pagamento_path(matricula), method: :post, class: "glyphicon glyphicon-usd", title: t('buttons.pay') %>
+            <% end %>
+          </td>
+          <td class="text-center">
+            <% if matricula.ativo == 0 %>
+              -
+            <% else %>
+              <%= link_to "", matriculas_cancellation_path(matricula), method: :put, data: { confirm: t('messages.cancel_matricula') }, class: "glyphicon glyphicon-ban-circle", title: t('buttons.cancel') %>
+            <% end %>
+          </td>
           <td><%= link_to "", edit_matricula_path(matricula), class: "glyphicon glyphicon-pencil", title: t('buttons.edit') %>&nbsp;
           <%= link_to "", matricula, method: :delete, data: { confirm: t('messages.confirm') }, class: "glyphicon glyphicon-remove", title: t('buttons.destroy') %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <div class="panel-footer text-center" style="padding: 0;">
+    <%= paginate @matriculas %>
+  </div>
 </div>
 
 <%= link_to t('buttons.new'), new_matricula_path, class: "btn btn-default" %>

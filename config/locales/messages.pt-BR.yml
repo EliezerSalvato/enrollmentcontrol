@@ -1,13 +1,23 @@
 "pt-BR":
   messages:
-    confirm: Tem certeza?
-    listing: Listando
+    confirm: Tem certeza que deseja remover este registro?
+    listing: Lista de
     including: Incluindo
     editing: Editando
+    paying: Pagamento de
+    filters: Filtros
     created: Registro incluído com sucesso!
     updated: Registro atualizado com sucesso!
     destroyed: Registro excluído com sucesso!
+    canceled: Registro cancelado com sucesso!
+    paid: Matrícula paga com sucesso!
+    error_destroyed: Não pode remover pois já possui matrícula
     numbers_only: deve conter apenas números!
     max_9: deve conter no máximo 9 caracteres!
     max_255: deve conter no máximo 255 caracteres!
     only_11: deve conter 11 caracteres!
+    cancel_matricula: Tem certeza que deseja cancelar a matrícula?
+    value_paid_less_than: Valor pago é menor que o valor da inscrição
+    must_be_informed: deve ser informado
+    change_of: Troco de R$
+    enrolled: já foi matrículado neste ano e período!

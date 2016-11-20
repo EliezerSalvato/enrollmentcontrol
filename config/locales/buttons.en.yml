@@ -1,0 +1,18 @@
+en:
+  buttons:
+    new: New
+    save: Save
+    show: Show
+    edit: Edit
+    destroy: Remove
+    back: Back
+    home: Home
+    actions: Actions
+    cancellation: Cancellation
+    cancel: Cancel
+    payment: Payment
+    pay: Pay
+    pay_value: Pay value
+    better_change: Better Change
+    filter: To filter
+    pending_payment: Pending payment

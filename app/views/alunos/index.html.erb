@@ -5,9 +5,16 @@
   </div>
 <% end %>
 
+<% if alert != nil %>
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+    <%= alert %>
+  </div>
+<% end %>
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= "#{t('messages.listing')} #{@alunos.model.model_name.human(count: @alunos.count)}" %>
+    <%= "#{t('messages.listing')} #{@alunos.model.model_name.human(count: 2)}" %>
   </div>
 
   <table class="table table-hover">
@@ -29,13 +36,17 @@
           <td><%= aluno.cpf.to_cpf_format %></td>
           <td><%= aluno.rg %></td>
           <td><%= aluno.data_nascimento.strftime("%d/%m/%Y") %></td>
-          <td><%= aluno.telefone %></td>
+          <td><%= formata_telefone(aluno.telefone) %></td>
           <td><%= link_to "", edit_aluno_path(aluno), class: "glyphicon glyphicon-pencil", title: t('buttons.edit') %>&nbsp;
           <%= link_to "", aluno, method: :delete, data: { confirm: t('messages.confirm') }, class: "glyphicon glyphicon-remove", title: t('buttons.destroy') %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <div class="panel-footer text-center" style="padding: 0;">
+    <%= paginate @alunos %>
+  </div>
 </div>
 
 <%= link_to t('buttons.new'), new_aluno_path, class: "btn btn-default" %>

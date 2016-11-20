@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :matriculas
-  resources :cursos
-  resources :alunos
+
+  resources :matriculas, except: :show
+  resources :cursos, except: :show
+  resources :alunos, except: :show
+
+  post 'matriculas/pagamento/:id(.:format)', to: 'pagamento_matricula#edit', as: 'matriculas/pagamento'
+  put 'matriculas/cancellation/:id(.:format)', to: 'matriculas#cancellation', as: 'matriculas/cancellation'
   get 'home/index'
   root 'home#index'
 

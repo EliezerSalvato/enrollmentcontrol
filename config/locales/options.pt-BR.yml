@@ -1,0 +1,9 @@
+"pt-BR":
+  options:
+    'yes': Sim
+    'no': Não
+    morning: Matutino
+    afternoon: Vespertino
+    integral: Integral
+    banknotes_of: cédula(s) de
+    coins_of: moeda(s) de

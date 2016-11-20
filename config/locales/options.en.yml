@@ -1,0 +1,9 @@
+en:
+  options:
+    'yes': 'Yes'
+    'no': 'No'
+    morning: Morning
+    afternoon: Afternoon
+    integral: Integral
+    banknotes_of: banknote(s) of
+    coins_of: coins of

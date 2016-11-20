@@ -1,4 +1,4 @@
-module CursosHelper
+module PagamentoMatriculaHelper
   def busca_descricao_periodo(periodo)
     case periodo
       when 1 then I18n.t('options.morning')

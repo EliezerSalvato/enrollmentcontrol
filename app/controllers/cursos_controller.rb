@@ -1,11 +1,11 @@
 class CursosController < ApplicationController
-  before_action :set_curso, only: [:show, :edit, :update, :destroy]
+  before_action :set_curso, only: [:edit, :update, :destroy]
   before_action :set_options_for_select, only: [:new, :edit, :update, :create]
 
   # GET /cursos
   # GET /cursos.json
   def index
-    @cursos = Curso.all
+    @cursos = Curso.all.page(params[:page]).per(15)
   end
 
   # GET /cursos/new
@@ -50,16 +50,22 @@ class CursosController < ApplicationController
   # DELETE /cursos/1
   # DELETE /cursos/1.json
   def destroy
-    @curso.destroy
-    respond_to do |format|
-      format.html { redirect_to cursos_path, notice: I18n.t('messages.destroyed') }
-      format.json { head :no_content }
+    if @curso.destroy
+      respond_to do |format|
+        format.html { redirect_to cursos_path, notice: I18n.t('messages.destroyed') }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to cursos_path, alert: I18n.t('messages.error_destroyed') }
+        format.json { head :no_content }
+      end
     end
   end
 
   private
     def set_options_for_select
-      @periodo_options_for_select = [["Matutino", 1], ["Vespertino", 2], ["Integral", 3]]
+      @periodo_options_for_select = [[I18n.t('options.morning'), 1], [I18n.t('options.afternoon'), 2], [I18n.t('options.integral'), 3]]
     end
 
     # Use callbacks to share common setup or constraints between actions.

@@ -1,11 +1,21 @@
 class MatriculasController < ApplicationController
-  before_action :set_matricula, only: [:show, :edit, :update, :destroy]
+  before_action :set_matricula, only: [:edit, :update, :destroy, :cancellation]
   before_action :set_alunos_options_for_select, :set_cursos_options_for_select, :set_sim_nao_options_for_select, only: [:new, :edit, :update, :create]
 
   # GET /matriculas
   # GET /matriculas.json
   def index
-    @matriculas = Matricula.all
+    if params[:commit].present?
+      @matriculas = Matricula.all
+      @matriculas = @matriculas.joins(:aluno).where("alunos.nome LIKE '%#{params[:aluno]}%'") if params[:aluno].present?
+      @matriculas = @matriculas.joins(:curso).where("cursos.nome LIKE '%#{params[:curso]}%'") if params[:curso].present?
+      @matriculas = @matriculas.where("ano = #{params[:ano]}") if params[:ano].present?
+      @matriculas = @matriculas.where("pago = 0") if params[:pagamento_pendente].present?
+    else
+      @matriculas = Matricula.where(ativo: 1)
+    end
+
+    @matriculas = @matriculas.page(params[:page]).per(15)
   end
 
   # GET /matriculas/new
@@ -15,6 +25,10 @@ class MatriculasController < ApplicationController
 
   # GET /matriculas/1/edit
   def edit
+  end
+
+  def filter
+
   end
 
   # POST /matriculas
@@ -57,6 +71,15 @@ class MatriculasController < ApplicationController
     end
   end
 
+  def cancellation
+    @matricula.update(ativo: 0)
+
+    respond_to do |format|
+      format.html { redirect_to matriculas_path, notice: I18n.t('messages.canceled') }
+      format.json { head :no_content }
+    end
+  end
+
   private
     def set_alunos_options_for_select
       @alunos_options_for_select = Aluno.all
@@ -67,7 +90,7 @@ class MatriculasController < ApplicationController
     end
 
     def set_sim_nao_options_for_select
-      @sim_nao_options_for_select = [["Não", 0], ["Sim", 1]]
+      @sim_nao_options_for_select = [[I18n.t('options.no'), 0], [I18n.t('options.yes'), 1]]
     end
 
     # Use callbacks to share common setup or constraints between actions.

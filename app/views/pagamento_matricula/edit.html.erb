@@ -1,0 +1,75 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "#{t('messages.paying')} #{t('activerecord.models.matricula.one')}" %>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= form_tag(matriculas_pagamento_path, class: "form-horizontal") do %>
+        <div class="form-group">
+          <label class="col-xs-4 control-label"><%= t('activerecord.models.matricula.one') %>:</label>
+          <label class="col-xs-8 control-label" style="text-align: left;"><%= @matricula.id %></label>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-4 control-label"><%= t('activerecord.models.aluno.one') %>:</label>
+          <label class="col-xs-8 control-label" style="text-align: left;"><%= Aluno.find(@matricula.aluno_id).nome %></label>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-4 control-label"><%= t('activerecord.models.curso.one') %>:</label>
+          <label class="col-xs-8 control-label" style="text-align: left;"><%= Curso.find(@matricula.curso_id).nome %></label>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-4 control-label"><%= t('activerecord.attributes.matricula.ano') %>:</label>
+          <label class="col-xs-8 control-label" style="text-align: left;"><%= @matricula.ano %></label>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-4 control-label"><%= t('activerecord.attributes.matricula.periodo') %>:</label>
+          <label class="col-xs-8 control-label" style="text-align: left;"><%= busca_descricao_periodo(Curso.find(@matricula.curso_id).periodo) %></label>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-4 control-label"><%= t('activerecord.attributes.curso.valor_inscricao') %>:</label>
+          <% valor = Curso.find(@matricula.curso_id).valor_inscricao %>
+          <label class="col-xs-8 control-label" style="text-align: left;"><%= format("%.2f", valor) %></label>
+          <%= hidden_field_tag :valor_inscricao, valor, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-4 control-label"><%= t('buttons.pay_value') %>:</label>
+          <div class="col-xs-4">
+            <%= text_field_tag :valor_pago, params[:valor_pago], class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-offset-4 col-xs-8">
+            <%= submit_tag t('buttons.pay'), name: 'pay', class: "btn btn-default" %>
+            <%= submit_tag t('buttons.better_change'), name: 'better_change', class: "btn btn-default" %>
+            <%= link_to t('buttons.back'), matriculas_path, class: "btn btn-default"%>
+          </div>
+        </div>
+
+        <% if @matricula.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger col-xs-offset-1 col-xs-10" role="alert">
+            <ul>
+            <% @matricula.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <% if notice != nil %>
+          <div class="alert alert-success col-xs-offset-1 col-xs-10" role="alert">
+            <h4>Troco: </h4>
+            <ul>
+              <%= notice.html_safe %>
+              <% flash[:notice] = nil %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+
+      <script type="text/javascript">
+        $(".form-group:has(.field_with_errors)").addClass("has-error");
+      </script>
+    </div>
+  </div>
+</div>

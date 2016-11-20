@@ -2,6 +2,7 @@
 <html>
 <head>
   <title><%= t('title') %></title>
+  <link rel="shortcut icon" href="<%= image_url('icone.ico') %>">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -13,17 +14,10 @@
     <div class="navbar navbar-default">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="<%= url == '/' ? 'active' : '' %>"><%= link_to 'Home', root_path %></li>
-          <li class="<%= url.include?('alunos') ? 'active' : '' %>"><%= link_to 'Alunos', alunos_path %></li>
-          <li class="<%= url.include?('cursos') ? 'active' : '' %>"><%= link_to 'Cursos', cursos_path %></li>
-          <li class="dropdown <%= url.include?('matriculas') ? 'active' : '' %>">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matrículas <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to 'Listagem', matriculas_path %></li>
-              <li><%= link_to 'Pagamento', matriculas_path %></li>
-              <li><%= link_to 'Cancelamento', matriculas_path %></li>
-            </ul>
-          </li>
+          <li class="<%= url == '/' ? 'active' : '' %>"><%= link_to t('home'), root_path %></li>
+          <li class="<%= url.include?('alunos') ? 'active' : '' %>"><%= link_to t('activerecord.models.aluno.other'), alunos_path %></li>
+          <li class="<%= url.include?('cursos') ? 'active' : '' %>"><%= link_to t('activerecord.models.curso.other'), cursos_path %></li>
+          <li class="<%= url.include?('matriculas') ? 'active' : '' %>"><%= link_to t('activerecord.models.matricula.other'), matriculas_path %></li>
         </ul>
       </div>
     </div>
@@ -33,5 +27,19 @@
     <%= yield %>
   </div>
 
+  <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><%= t('information') %></h4>
+        </div>
+        <div id="modal_info_body" class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

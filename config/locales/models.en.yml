@@ -1,0 +1,30 @@
+en:
+  activerecord:
+    models:
+      aluno:
+        one: Student
+        other: Students
+      curso:
+        one: Course
+        other: Courses
+      matricula:
+        one: Enrollment
+        other: Enrollments
+    attributes:
+      aluno:
+        cpf: CPF
+        rg: RG
+        data_nascimento: Date of birth
+        nome: Name
+        telefone: Phone
+      curso:
+        nome: Name
+        valor_inscricao: Registration value
+        periodo: Period
+      matricula:
+        aluno: Student
+        curso: Course
+        data_matricula: Date of enrollment
+        ano: Year
+        ativo: Active
+        pago: Paid
